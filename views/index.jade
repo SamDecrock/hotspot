@@ -1,0 +1,17 @@
+doctype html5
+html(xmlns='http://www.w3.org/1999/xhtml')
+	head
+		meta(name='viewport', content='initial-scale=1.0, user-scalable=no')
+		title= title
+		link(rel='stylesheet', href="/vendor/bootstrap.min.css")
+	body
+		center
+			h2= title
+			form(name='login_form', action='#{action}', method='post')
+				| Code van de dag:
+				br
+				input(type='text', name='password', style="text-transform:uppercase")
+				input(type='hidden', name='username', value='guest')
+				input(type='hidden', name='userurl', value='#{userurl}')
+				input.btn.btn-primary(type='submit', value='Ga')
+
