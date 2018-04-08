@@ -9,7 +9,7 @@ var password;
 var server = dgram.createSocket("udp4");
 
 server.on("message", function (msg, rinfo) {
-	var code, username, password, packet;
+	var code, givenUsername, givenPassword, packet;
 	try {
 		packet = radius.decode({packet: msg, secret: secret});
 	} catch (e) {
@@ -22,13 +22,13 @@ server.on("message", function (msg, rinfo) {
 		return;
 	}
 
-	username = packet.attributes['User-Name'];
-	password = packet.attributes['User-Password'];
+	givenUsername = packet.attributes['User-Name'];
+	givenPassword = packet.attributes['User-Password'];
 
-	console.log('Access-Request for ' + username);
-	console.log("password", password);
+	console.log('Access-Request for ' + givenUsername);
+	console.log("password", givenPassword);
 
-	if (username == 'guest' && password.toLowerCase() == mainPassword.toLowerCase()) {
+	if (givenUsername == 'guest' && givenPassword.toLowerCase() == password.toLowerCase()) {
 		code = 'Access-Accept';
 	} else {
 		code = 'Access-Reject';
@@ -40,7 +40,7 @@ server.on("message", function (msg, rinfo) {
 		secret: secret
 	});
 
-	console.log('Sending ' + code + ' for user ' + username);
+	console.log('Sending ' + code + ' for user ' + givenUsername);
 	server.send(response, 0, response.length, rinfo.port, rinfo.address, function(err, bytes) {
 		if (err) {
 			console.log('Error sending response to ', rinfo);
