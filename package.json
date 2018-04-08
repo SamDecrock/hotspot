@@ -1,5 +1,5 @@
 {
-  "name": "captiveportal",
+  "name": "hotspot",
   "version": "0.0.0",
   "description": "",
   "main": "app.js",
@@ -17,9 +17,9 @@
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
     "express": "~4.13.1",
-    "fs": "0.0.1-security",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
+    "node-cron": "^1.2.1",
     "node-radius": "git://github.com/retailnext/node-radius.git",
     "randomatic": "^3.0.0",
     "serve-favicon": "~2.3.0",

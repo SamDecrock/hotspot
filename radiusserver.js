@@ -3,10 +3,10 @@
 var radius = require('radius');
 var dgram = require("dgram");
 
-var secret = 'radius_secret';
-var server = dgram.createSocket("udp4");
+var secret;
+var password;
 
-var mainPassword;
+var server = dgram.createSocket("udp4");
 
 server.on("message", function (msg, rinfo) {
 	var code, username, password, packet;
@@ -53,9 +53,14 @@ server.on("listening", function () {
 	console.log("Radius server listening " + address.address + ":" + address.port);
 });
 
-exports.start = function (password) {
-	mainPassword = password;
+exports.start = function (_password, _secret) {
+	password = _password;
+	secret = _secret;
 	server.bind(1812);
+}
+
+exports.changePassword = function (password) {
+	password = _password;
 }
 
 

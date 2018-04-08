@@ -14,10 +14,23 @@ var https = require('https');
 var randomize = require('randomatic');
 var radiusserver = require('./radiusserver');
 
-var codeOfTheDay = randomize('?', 5, {chars: '23456789abcdefghjkmnpqrstuvwxyz'});
+
+function generateCode() {
+	return randomize('?', 5, {chars: '23456789abcdefghjkmnpqrstuvwxyz'});
+}
+
+var codeOfTheDay = generateCode();
 console.log('codeOfTheDay:', codeOfTheDay);
 
-radiusserver.start(codeOfTheDay);
+radiusserver.start(codeOfTheDay, 'radius_secret');
+
+var cron = require('node-cron');
+
+cron.schedule('0 0 * * *', function(){
+	var codeOfTheDay = generateCode();
+	console.log('midnight! changing code of the day to', codeOfTheDay);
+	radiusserver.changePassword(codeOfTheDay);
+});
 
 
 var app = express();
