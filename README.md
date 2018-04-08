@@ -33,16 +33,17 @@ I'm using a Ruckus Zoneflex 7363. These are very decent wifi access points and a
 
 To configure the hotspot, first go Configuration -> Hotspot. Change the following:
 
-- Hotspot service: *Enabled*
-- Redirect unauth. user to:: *the url (with https!) of this hotspot service.*
-- Primary RADIUS Server: *the ip address of the server running this hotspot service.*
-- Walled Garden: add new entry: *the ip or hostname of the server running this hotspot service.*
+- Hotspot service: **Enabled**
+- Redirect unauth. user to:: ***the url of this hotspot service (must be https).***
+- Primary RADIUS Server: ***the ip address of the server running this hotspot service.***
+- RADIUS Server Secret:	**radius_secret** (currently hardcoded in app.js)
+- Walled Garden: add new entry: ***the ip or hostname of the server running this hotspot service.***
 
 Next, go to Configuration -> Radio 2.4G or Radio 5G and pick a free wifi radio. Change the following:
 
-- Wireless Availability?: *Enabled*
-- SSID: *choose a name for your hotspot wifi*
-- Hotspot Service: *hotspot0*
+- Wireless Availability?: **Enabled**
+- SSID: ***choose a name for your hotspot wifi***
+- Hotspot Service: **hotspot0**
 
 
 That's it. If all goes well, you should find a new wifi hotspot which loads a captive portal asking for a daily code. Go to https://yourserver/admin to get that code.
